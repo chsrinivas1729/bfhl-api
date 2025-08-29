@@ -18,6 +18,17 @@ function alternatingCaps(str) {
   return result;
 }
 
+// GET / route — optional for root check
+app.get('/', (req, res) => {
+  res.send('BFHL API is running. Use POST /bfhl endpoint.');
+});
+
+// GET /bfhl route — friendly message when accessed via browser or GET
+app.get('/bfhl', (req, res) => {
+  res.send('BFHL API is running. Please send a POST request to this endpoint.');
+});
+
+// POST /bfhl route — your main API logic
 app.post("/bfhl", (req, res) => {
   try {
     const data = req.body.data;
@@ -75,7 +86,4 @@ app.post("/bfhl", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.get('/', (req, res) => {
-  res.send('BFHL API is running. Use POST /bfhl endpoint.');
-});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
